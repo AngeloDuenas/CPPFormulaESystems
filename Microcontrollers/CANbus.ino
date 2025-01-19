@@ -44,7 +44,21 @@ void loop() {
       Serial.print(" ");
     }
     Serial.println();
+    
+      Serial.println("Decoded Temperatures:");
+    for (byte i = 0; i < len; i += 2) {
+      if (i + 1 < len) { // Ensure there are at least 2 bytes available
+        uint16_t tempRaw = (rxBuf[i] << 8) | rxBuf[i + 1]; // Combine 2 bytes
+        float temperatureCelsius = tempRaw / 100.0;        // Convert to Celsius
+        char moduleLabel = 'A' + (i / 2);
+        Serial.print("Module ");
+        Serial.print(moduleLabel); // Temperature index
+        Serial.print(": ");
+        Serial.print(temperatureCelsius);
+        Serial.println(" °C");
+      }
+    }
   }
-
+  
   delay(1000); // Wait for 1 second
 }
