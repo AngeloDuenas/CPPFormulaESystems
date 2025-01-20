@@ -38,6 +38,9 @@ void loop() {
     Serial.print("Received message with ID: 0x");
     Serial.println(rxId, HEX);
 
+if (i == 0) {
+      Serial.print("Gate Driver Board: ");
+} else {
     Serial.print("Data: ");
     for (byte i = 0; i < len; i++) {
       Serial.print(rxBuf[i], HEX);
@@ -45,6 +48,8 @@ void loop() {
     }
     Serial.println();
   }
+}
+
 
   delay(1000); // Wait for 1 second
 }
