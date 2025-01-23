@@ -8,7 +8,7 @@ MCP_CAN CAN(CAN_CS_PIN);
 void getTemperature(const String& input, byte rxBuf[], byte len) {
   input.trim();
 
-  if (input.startsWith("Board")) {
+  if (input.startsWith("Gate Driver")) {
     uint16_t tempRaw = (rxBuf[0] << 8) | rxBuf[1];
     float temperatureCelsius = tempRaw / 100.0;
     Serial.print("Gate Driver Board Temperature: ");
