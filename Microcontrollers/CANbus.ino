@@ -28,10 +28,10 @@ void getTemperature(const String& input, byte rxBuf[], byte len) {
       Serial.print(temperatureCelsius);
       Serial.println(" °C");
     } else {
-      Serial.println("Error: Invalid module index!");
+      Serial.println("Module index not found");
     }
   } else {
-    Serial.println("Error: Unrecognized input format!");
+    Serial.println("Input format is invalid");
   }
 }
 
