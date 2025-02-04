@@ -35,6 +35,34 @@ void getTemperature(const String& input, byte rxBuf[], byte len) {
   }
 }
 
+  else if (input.indexOf("Board") != -1 && input.indexOf("Mod") != -1) {
+    int boardIndex = input.substring(input.indexOf("Board") + 6, input.indexOf("Mod") - 1).toInt();
+    char moduleLabel = input.charAt(input.indexOf("Mod") + 4);
+    byte moduleIndex = moduleLabel - 'A';
+
+    if (boardIndex >= 0 && boardIndex < 5 && moduleIndex >= 0 && moduleIndex < 3) {
+      byte index = 2 + (moduleIndex * 2);
+      if (index < len - 1) {
+        uint16_t tempRaw = (rxBuf[index] << 8) | rxBuf[index + 1];
+        float temperatureCelsius = tempRaw / 100.0;
+        Serial.print("Board ");
+        Serial.print(boardIndex);
+        Serial.print(", Module ");
+        Serial.print(moduleLabel);
+        Serial.print(" Temperature: ");
+        Serial.print(temperatureCelsius);
+        Serial.println(" °C");
+      } else {
+        Serial.println("Module data is invalid");
+      }
+    } else {
+      Serial.println("Board or Module not found");
+    }
+  } else {
+    Serial.println("Input format is invalid");
+  }
+}
+
 void setup() {
   Serial.begin(115200);
 
